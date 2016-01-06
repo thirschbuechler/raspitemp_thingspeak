@@ -1,0 +1,58 @@
+Joshwa, Brickpi
+adafruit.com
+https://github.com/ondrej1024/foxg20
+you only need the dhtlib folder
+/usr/bin/Adafruit_DHT
+
+http://pymotw.com/2/logging/
+https://docs.python.org/2/howto/logging-cookbook.html
+
+base2013 webgui woher?
+highstock-charts used!!
+
+input: write-enabled api key, number of sensors
+initialization structures:
+add/delete
+
+in ds18b20.py you need for every.. 
+
+in dht22 you need..
+
+'/home/'+username+'/bin/logs/'
+foxg20/dhtlib
+
+the log-files will look something like this:
+
+06-28 14:03 root         WARNING  ----Start-----
+06-28 18:26 root         WARNING  HTTP Upload failed (miserably)
+06-28 18:43 root         WARNING  ----Start-----
+06-28 18:43 root         WARNING  2: failed to read
+06-28 18:45 root         WARNING  2: back in business!
+06-28 20:20 root         WARNING  HTTP Upload failed (miserably)
+06-29 10:44 root         WARNING  HTTP Upload failed (miserably)
+07-06 22:36 root         WARNING  HTTP Upload failed (miserably)
+07-07 16:08 root         WARNING  5: failed to read
+07-07 16:09 root         WARNING  5: back in business!
+07-07 22:40 root         WARNING  HTTP Upload failed (miserably)
+07-09 23:00 root         WARNING  HTTP Upload failed (miserably)
+07-12 10:08 root         WARNING  ----Start-----
+
+
+
+
+MAILTO=mail@mail.com
+
+@reboot /home/tau/bin/T-dog.sh
+@reboot /home/tau/bin/T-dog2.sh
+#@reboot pyLoadCore --daemon
+#disabled on 28.6.15, as well as in rc.d
+
+#unleash the hounds every 15min
+*/15 * * * * /home/tau/bin/T-dog.sh
+*/15 * * * * /home/tau/bin/T-dog2.sh
+
+#sudo pyloadcore doesnt work here for some reason
+#@reboot sudo python /home/tau/bin/dht22_matrix.py
+#don't start dht22 here, the t-dog2 will be faster and there will 2 processes
+#disable thingspeak-startup script
+

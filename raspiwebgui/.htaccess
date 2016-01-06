@@ -1,0 +1,5 @@
+AuthUserFile /media/RaspiSSD/share/raspiwebgui/.htpasswd
+AuthName "Login Area"
+AuthType Basic
+
+require user chri

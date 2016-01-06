@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<head>
+
+  <meta charset="utf-8" />
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Raspi</title>
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/main.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+  
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+
+  <script type="text/javascript">
+  // A valid json string
+//var someJsonString = '{"someProperty":"someValue"}';
+
+// jsonObject will contain a valid JavaScript object
+//var jsonObject = eval('(' + someJsonString + ')');
+
+// Will display the string 'someValue'
+//alert(jsonObject.someProperty);
+
+
+//alert("alive");
+var ONE_SEC = 1000; /* ms */
+var ONE_MIN = 60 * 1000; /* ms */
+var ONE_HOUR = 60 * 60 * 1000; /* ms */
+//var outputstring = '';
+
+function addoutput(s){
+	/*if (outputstring.length > 0){
+		outputstring=outputstring+', '+s;
+		outp(outputstring);
+		}
+	else
+		{outputstring=s;}*/
+		outp(s);
+	
+	
+}
+
+function outp(s) {
+    //alert(s);
+    document.getElementById('datev').innerHTML = document.getElementById('datev').innerHTML + '<br>' + s;
+    //not \n because it's html not js
+    return 0;
+}
+
+//testchannel up-to date indicator
+$.getJSON("http://api.thingspeak.com/channels/16364/status?key=EV2B25MC9LC6GF4Q&timezone=Europe/Berlin&results=1&callback=?",
+function (data) {
+    // alert("ba");//json einbinden!!!!!
+
+
+    //var str = JSON.stringify(data, undefined, 2);//display structure
+    //alert(str);
+
+    //alert(data.channel.name);
+
+    var m = data.feeds[0].created_at; //brackets indicate an array!!!
+    //    alert(m);
+
+
+
+    var dataDate = new Date(m);
+
+
+    var myDate = new Date();
+
+
+    if (((new Date(myDate.getTime())) - dataDate) < ONE_MIN*2) {
+        addoutput(data.channel.name+" "+"up to date (<2min) (@manual page reload)");
+    } //endif
+    else if (((new Date(myDate.getTime())) - dataDate) < ONE_MIN*15) {
+        addoutput(data.channel.name+" "+"semi up to date (<15min) (@manual page reload)");
+    } //endif
+	else if (((new Date(myDate.getTime())) - dataDate) < ONE_HOUR) {
+        addoutput(data.channel.name+" "+"not up to date (<1h) (@manual page reload)");
+    } //endif
+    else {
+        addoutput(data.channel.name+" "+"failed to update (>1h) (@manual page reload)");
+    }
+
+    //outp(" ");
+    //outp("now, last updated:");
+    //outp(myDate);
+    //outp(dataDate);
+});
+
+try{
+//another channel with a different api-key would go here..
+}
+catch(err)
+{addoutput("error while reading DHT22");}
+//outp(outputstring);
+
+</script>
+  
+  
+  <link rel="stylesheet" href="ligature.css">
+  
+  <!-- Google fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Playfair+Display:400italic' rel='stylesheet' type='text/css' />
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+
+<body>
+
+<!-- ######################## Main Menu ######################## -->
+ 
+<nav>
+
+     <div class="twelve columns header_nav">
+     <div class="row">
+      
+	     <ul id="menu-header" class="nav-bar horizontal">
+        
+          <li class=""><a href="index.html">Home</a></li>
+          <li class="active"><a href="Temp.html">Temp</a></li>
+
+      
+        </ul>
+        
+        
+        <script type="text/javascript">
+         //<![CDATA[
+         //$('ul#menu-header').nav-bar();
+          //]]>
+        </script>
+        
+      </div>  
+      </div>
+      
+</nav>
+      
+      
+<!-- ######################## Header ######################## -->
+        
+        <header>
+              <h1 class="welcome_text">Temperatures</h1>    
+        </header>
+
+<!-- ######################## Gallery Section ######################## -->
+      <p id="datev"></p><!-- Update time stuff: funktioniert nur vorm iframe -->
+      <div>
+      <section class="section_light">
+		<table>
+			<tr>
+				<td>
+					gauge1 would go here
+					<!-- gauge1 -->
+					<!--<script type="text/javascript">document.write(unescape("%3Cscript src='" + "http://www.iobridge.com/widgets/io.js?blablabla' type='text/javascript'%3E%3C/script%3E"));</script>-->
+				</td>
+				
+				<td>
+					gauge1 would go here
+					<!-- gauge1 -->
+					<!--<script type="text/javascript">document.write(unescape("%3Cscript src='" + "http://www.iobridge.com/widgets/io.js?blablabla2' type='text/javascript'%3E%3C/script%3E"));</script>-->
+				</td>
+			</tr>
+			<tr>
+				<td><!--align="center" not working -->
+					gauge1 would go here
+					<!-- gauge1 -->
+					<!--<script type="text/javascript">document.write(unescape("%3Cscript src='" + "http://www.iobridge.com/widgets/io.js?blablabla3' type='text/javascript'%3E%3C/script%3E"));</script>°C-->
+				</td>
+				
+				<td>
+					gauge1 would go here
+					<!-- gauge1 -->
+					<!--<script type="text/javascript">document.write(unescape("%3Cscript src='" + "http://www.iobridge.com/widgets/io.js?blablabla4' type='text/javascript'%3E%3C/script%3E"));</script>°C-->
+				</td>
+			</tr>
+				
+		</table>
+			
+          
+			
+			
+            
+			<iframe src="tempr.html" style="width:100%;height:800px" seamless></iframe>
+			
+			
+	  </div>
+		<p style="text-indent:10px;">
+			you may put text here
+			
+			<br>
+			<br>			
+		</p>
+        </section>
+        
+		<!-- end section -->
+        
+<!-- ######################## Footer ######################## -->  
+      
+
+        
+        
+		<!-- Included JS Files (Compressed) -->
+		<script src="javascripts/foundation.min.js" type="text/javascript">
+		</script>
+		<!-- Initialize JS Plugins -->
+		<script src="javascripts/app.js" type="text/javascript">
+		</script>
+		<!-- Masonry for galleries -->
+		<script src="javascripts/masonry.js" type="text/javascript">
+		</script>
+		<script type="text/javascript">
+//<![CDATA[
+      $(function(){
+        var $container = $('#container');
+        $container.imagesLoaded( function(){
+          $container.masonry({
+            itemSelector : '.box',
+                        isFitWidth: true,
+                        isAnimated: true
+          });
+        });
+      });
+  //]]>
+  </script>
+		<!-- END Masonry -->
+		</body>
+		</html>
