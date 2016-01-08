@@ -16,5 +16,5 @@ https://github.com/ondrej1024/foxg20,
 http://pymotw.com/2/logging/,
 https://docs.python.org/2/howto/logging-cookbook.html,
 http://www.free-css.com/free-css-templates/page179/base-2013,
-Highstock-charts via http://forum.arduino.cc/index.php?topic=213058.0 (basic version, not the one from github),
+Highstock-charts via http://forum.arduino.cc/index.php?topic=213058.0 (basic version, not the github-one i think),
 Thingspeak and Iobridge
